@@ -1,0 +1,32 @@
+package com.wajahatkarim3.mvvm.gdglive.data.respository
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.wajahatkarim3.mvvm.gdglive.app.Constants
+import com.wajahatkarim3.mvvm.gdglive.data.remote.MovieApiService
+import com.wajahatkarim3.mvvm.gdglive.ktx.RetrofitCallback
+import com.wajahatkarim3.mvvm.model.MovieModel
+
+class MovieRespository constructor(private val moviesApiService: MovieApiService)
+{
+    fun getLatestMovies(success: (movieList: List<MovieModel>) -> Unit, failure: (message: String) -> Unit)
+    {
+        moviesApiService.getNowPlaying(Constants.API_KEY)
+            .enqueue(RetrofitCallback {
+                onSuccess { call, response ->
+                    if (response != null && response.isSuccessful && response.body()?.success == true) {
+                        var list = arrayListOf<MovieModel>()
+                        response.body()?.results?.let {
+                            list.addAll(it)
+                        }
+                        success.invoke(list)
+                    }
+                }
+
+                onError { call, throwable ->
+                    failure.invoke(throwable?.localizedMessage ?: "Unknown Error Occurred!")
+                }
+            })
+
+    }
+}
