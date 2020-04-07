@@ -12,7 +12,7 @@ import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.databinding.MovieItemLayoutBinding
 import com.wajahatkarim3.mvvm.model.MovieModel
 
-class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel) -> Unit) : ListAdapter<MovieModel, MoviesRecyclerAdapter.MovieViewHolder>(MOVIE_DIFF_CALLBACK)
+class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel, itemBinding: MovieItemLayoutBinding) -> Unit) : ListAdapter<MovieModel, MoviesRecyclerAdapter.MovieViewHolder>(MOVIE_DIFF_CALLBACK)
 {
     private val moviesList = arrayListOf<MovieModel>()
 
@@ -45,7 +45,7 @@ class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel) -> Unit) : Lis
 
     inner class MovieViewHolder(val itemBinding: MovieItemLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bindItem(movie: MovieModel, onItemClick: (movie: MovieModel) -> Unit) {
+        fun bindItem(movie: MovieModel, onItemClick: (movie: MovieModel, itemBinding: MovieItemLayoutBinding) -> Unit) {
             itemBinding.apply {
                 imgMoviePoster.load(Constants.IMAGE_URL + movie.posterPath) {
                     placeholder(R.color.colorAccent)
@@ -53,7 +53,7 @@ class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel) -> Unit) : Lis
                 }
 
                 imgMoviePoster.setOnClickListener {
-                    onItemClick.invoke(movie)
+                    onItemClick.invoke(movie, itemBinding)
                 }
             }
         }

@@ -11,6 +11,7 @@
     <ImageView android:id="@+id/imgMoviePoster"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:transitionName="moviePoster"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:background="@tools:sample/backgrounds/scenic"

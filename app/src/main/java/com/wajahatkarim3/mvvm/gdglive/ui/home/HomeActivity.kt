@@ -1,10 +1,13 @@
 package com.wajahatkarim3.mvvm.gdglive.ui.home
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.graphics.Movie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +15,8 @@ import androidx.viewbinding.ViewBinding
 import com.wajahatkarim3.mvvm.gdglive.R
 import com.wajahatkarim3.mvvm.gdglive.adapters.MoviesRecyclerAdapter
 import com.wajahatkarim3.mvvm.gdglive.databinding.ActivityHomeBinding
+import com.wajahatkarim3.mvvm.gdglive.ui.movie_details.MovieDetailsActivity
+import com.wajahatkarim3.mvvm.gdglive.ui.movie_details.MovieDetailsUiState
 import org.koin.android.ext.android.get
 import org.koin.ext.getScopeName
 
@@ -38,8 +43,11 @@ class HomeActivity : AppCompatActivity() {
     fun setupViews()
     {
         // Recycler Adapter
-        recyclerAdapter = MoviesRecyclerAdapter { movie ->
-
+        recyclerAdapter = MoviesRecyclerAdapter { movie, itemBinding ->
+            var intent = Intent(this, MovieDetailsActivity::class.java)
+            intent.putExtra("movie", movie)
+            var options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, itemBinding.imgMoviePoster, "moviePoster")
+            startActivity(intent, options.toBundle())
         }
 
         // RecyclerView
