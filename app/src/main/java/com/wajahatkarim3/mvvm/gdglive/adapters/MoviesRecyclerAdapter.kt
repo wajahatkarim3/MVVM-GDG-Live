@@ -1,11 +1,14 @@
 package com.wajahatkarim3.mvvm.gdglive.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.wajahatkarim3.mvvm.gdglive.R
+import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.databinding.MovieItemLayoutBinding
 import com.wajahatkarim3.mvvm.model.MovieModel
 
@@ -22,6 +25,14 @@ class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel) -> Unit) : Lis
         holder.bindItem(getItem(position), onItemClick)
     }
 
+    override fun getItemCount(): Int {
+        return moviesList.size
+    }
+
+    override fun getItem(position: Int): MovieModel {
+        return moviesList[position]
+    }
+
     fun setMovies(movies: List<MovieModel>) {
         clearAllMovies()
         moviesList.addAll(movies)
@@ -36,7 +47,10 @@ class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel) -> Unit) : Lis
 
         fun bindItem(movie: MovieModel, onItemClick: (movie: MovieModel) -> Unit) {
             itemBinding.apply {
-                imgMoviePoster.load(movie.posterPath)
+                imgMoviePoster.load(Constants.IMAGE_URL + movie.posterPath) {
+                    placeholder(R.color.colorAccent)
+                    error(R.color.colorPrimary)
+                }
 
                 imgMoviePoster.setOnClickListener {
                     onItemClick.invoke(movie)

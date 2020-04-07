@@ -44,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         // RecyclerView
         bi.recyclerMoviesList.layoutManager = GridLayoutManager(this, 2)
+        bi.recyclerMoviesList.setHasFixedSize(true)
         bi.recyclerMoviesList.adapter = recyclerAdapter
     }
 
