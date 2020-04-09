@@ -13,14 +13,12 @@ import com.wajahatkarim3.mvvm.gdglive.R
 import com.wajahatkarim3.mvvm.gdglive.adapters.ActorsRecyclerAdapter
 import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.databinding.ActivityMovieDetailsBinding
+import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 import org.koin.android.ext.android.get
 
 class MovieDetailsActivity : AppCompatActivity() {
 
     private lateinit var bi: ActivityMovieDetailsBinding
-    private val viewModel by viewModels<MovieDetailsViewModel> {
-        MovieDetailsViewModelFactory(get())
-    }
 
     lateinit var recyclerAdapter: ActorsRecyclerAdapter
 
@@ -30,10 +28,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         setContentView(bi.root)
 
         setupViews()
-        initObservations()
         loadIntentData()
-
-        viewModel.loadMovieActors()
     }
 
     fun setupViews()
@@ -48,13 +43,13 @@ class MovieDetailsActivity : AppCompatActivity() {
         bi.recyclerActors.adapter = recyclerAdapter
     }
 
-    fun initObservations()
+    fun loadIntentData()
     {
-        // Movie
-        viewModel.currentMovie.observe(this, Observer { movie ->
+        if (intent.hasExtra("movie"))
+        {
+            var movie = intent.getParcelableExtra("movie") as MovieModel
             bi.apply {
                 txtMovieTitle.text = movie.title
-                txtPlot.text = movie.overview
                 txtRating.text = movie.voteAverage.toString()
                 txtReleaseDate.text = movie.release_date
                 imgMoviePoster.load(Constants.IMAGE_URL + movie.posterPath) {
@@ -62,42 +57,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                     placeholder(R.color.colorAccent)
                 }
             }
-        })
 
-        // Actors
-        viewModel.actorsList.observe(this, Observer { actorsList ->
-            recyclerAdapter.setItems(actorsList)
-        })
-
-        // UI
-        viewModel.uiState.observe(this, Observer { state ->
-            when(state)
-            {
-                ActorsLoadingState -> {
-                    bi.progressActors.visibility = View.VISIBLE
-                    bi.recyclerActors.visibility = View.GONE
-                }
-
-                ActorsContentState -> {
-                    bi.progressActors.visibility = View.GONE
-                    bi.recyclerActors.visibility = View.VISIBLE
-                }
-
-                is ErrorState -> {
-                    bi.recyclerActors.visibility = View.GONE
-                    bi.progressActors.visibility = View.GONE
-                    bi.lblCast.visibility = View.GONE
-                    Snackbar.make(bi.root, state.message, Snackbar.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-
-    fun loadIntentData()
-    {
-        if (intent.hasExtra("movie"))
-        {
-            viewModel.setMovieFromIntent(intent.getParcelableExtra("movie"))
         }
     }
 
