@@ -1,12 +1,10 @@
 package com.wajahatkarim3.mvvm.gdglive.data.respository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.data.remote.MovieApiService
 import com.wajahatkarim3.mvvm.gdglive.ktx.RetrofitCallback
-import com.wajahatkarim3.mvvm.model.ActorModel
-import com.wajahatkarim3.mvvm.model.MovieModel
+import com.wajahatkarim3.mvvm.gdglive.model.ActorModel
+import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
 class MovieRespository constructor(private val moviesApiService: MovieApiService)
 {

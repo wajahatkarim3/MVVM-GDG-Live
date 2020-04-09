@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wajahatkarim3.mvvm.gdglive.data.respository.MovieRespository
-import com.wajahatkarim3.mvvm.model.ActorModel
-import com.wajahatkarim3.mvvm.model.MovieModel
+import com.wajahatkarim3.mvvm.gdglive.model.ActorModel
+import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
 class MovieDetailsViewModel(private val movieRespository: MovieRespository) : ViewModel()
 {

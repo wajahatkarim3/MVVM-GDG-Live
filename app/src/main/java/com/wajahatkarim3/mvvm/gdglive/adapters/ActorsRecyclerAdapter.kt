@@ -10,7 +10,7 @@ import coil.transform.CircleCropTransformation
 import com.wajahatkarim3.mvvm.gdglive.R
 import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.databinding.ActorItemLayoutBinding
-import com.wajahatkarim3.mvvm.model.ActorModel
+import com.wajahatkarim3.mvvm.gdglive.model.ActorModel
 
 class ActorsRecyclerAdapter : ListAdapter<ActorModel, ActorsRecyclerAdapter.ActorViewHolder>(ACTOR_DIFF_CALLBACK)
 {

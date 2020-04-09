@@ -1,6 +1,5 @@
 package com.wajahatkarim3.mvvm.gdglive.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,7 @@ import coil.api.load
 import com.wajahatkarim3.mvvm.gdglive.R
 import com.wajahatkarim3.mvvm.gdglive.app.Constants
 import com.wajahatkarim3.mvvm.gdglive.databinding.MovieItemLayoutBinding
-import com.wajahatkarim3.mvvm.model.MovieModel
+import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
 class MoviesRecyclerAdapter(val onItemClick : (movie: MovieModel, itemBinding: MovieItemLayoutBinding) -> Unit) : ListAdapter<MovieModel, MoviesRecyclerAdapter.MovieViewHolder>(MOVIE_DIFF_CALLBACK)
 {

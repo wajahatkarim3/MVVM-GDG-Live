@@ -1,4 +1,4 @@
-package com.wajahatkarim3.mvvm.model
+package com.wajahatkarim3.mvvm.gdglive.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

@@ -1,11 +1,10 @@
 package com.wajahatkarim3.mvvm.gdglive.ui.home
 
-import android.graphics.Movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wajahatkarim3.mvvm.gdglive.data.respository.MovieRespository
-import com.wajahatkarim3.mvvm.model.MovieModel
+import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
 class HomeViewModel constructor(private val movieRepository: MovieRespository) : ViewModel()
 {

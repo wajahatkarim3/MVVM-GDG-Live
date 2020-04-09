@@ -1,4 +1,4 @@
-package com.wajahatkarim3.mvvm.model
+package com.wajahatkarim3.mvvm.gdglive.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
