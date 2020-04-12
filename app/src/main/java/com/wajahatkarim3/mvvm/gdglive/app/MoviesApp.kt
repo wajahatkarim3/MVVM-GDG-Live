@@ -15,8 +15,14 @@ class MoviesApp : Application()
 
     fun initKoin()
     {
+        // This is where Koin is being initialized and put in action.
         startKoin {
+            // Sometimes, Repository needs Android Context. Koin handles this case
+            // and provides us the Context whereever we need it.
             androidContext(applicationContext)
+
+            // List of all the modules to be handled by Koin. This code have only
+            // NetworkModule.
             modules(networkModule)
         }
     }

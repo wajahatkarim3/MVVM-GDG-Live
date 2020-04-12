@@ -8,6 +8,8 @@ import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
 class MovieRespository constructor(private val moviesApiService: MovieApiService)
 {
+
+
     fun getLatestMovies(success: (movieList: List<MovieModel>) -> Unit, failure: (message: String) -> Unit)
     {
         moviesApiService.getNowPlaying(Constants.API_KEY)

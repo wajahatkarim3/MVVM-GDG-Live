@@ -6,8 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.wajahatkarim3.mvvm.gdglive.data.respository.MovieRespository
 import com.wajahatkarim3.mvvm.gdglive.model.MovieModel
 
+// HomeViewModel is the middle layer between data and HomeActivity. It is getting
+// MovieRepository through Dependency Injection through constructor parameter.
 class HomeViewModel constructor(private val movieRepository: MovieRespository) : ViewModel()
 {
+    // We can simply use MutableLiveData instead of using
+    // LiveData & MutableLiveData like this. But that will give Activity/Fragment
+    // access to modify the data outside the ViewModel.
+    // The data only should be read-only outside ViewModel.
     private var _uiState = MutableLiveData<HomeUiState>()
     val uiState: LiveData<HomeUiState>
         get() = _uiState

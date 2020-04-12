@@ -9,8 +9,10 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.wajahatkarim3.mvvm.gdglive.R
 import com.wajahatkarim3.mvvm.gdglive.adapters.MoviesRecyclerAdapter
@@ -23,9 +25,15 @@ import org.koin.ext.getScopeName
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var bi: ActivityHomeBinding
+
+    // Default ViewModel without constructor parameters
+    // private val viewModel by viewModels<HomeViewModel>()
+
+    // ViewModel by Factory
     private val viewModel by viewModels<HomeViewModel>() {
         HomeViewModelFactory(get())
     }
+
 
     lateinit var recyclerAdapter: MoviesRecyclerAdapter
 
@@ -33,6 +41,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bi = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(bi.root)
+
+        // ViewModel initialization
+        // val tempViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         setupViews()
         initObservations()
@@ -58,6 +69,7 @@ class HomeActivity : AppCompatActivity() {
 
     fun initObservations()
     {
+        // This is where UI State is being observed from the ViewModel
         viewModel.uiState.observe(this, Observer { state ->
             when(state)
             {
